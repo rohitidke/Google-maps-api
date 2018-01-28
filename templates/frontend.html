@@ -1,0 +1,34 @@
+<html>
+  <head>
+		<title>Directions API</title>
+	</head>
+	<body>
+    <iframe
+      width="1000"
+      height="450"
+      frameborder="0" style="border:0"
+      src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBaeKOjXEG3Cce-YRsqxieRZ5HRy2MVTh0
+        &origin={{ori}}
+        &destination={{desti}}" >
+    </iframe>
+		<h1>Distance={{dist}}</h1>
+    <h1>Duration={{time}}</h1>
+    <h1>Directions=</h1>
+
+    <table>
+      <tr>
+        <td>Directions</td>
+        <td>Distance</td>
+        <td>Duration</td>
+      </tr>   <hr>
+   {% for direction in direct %}
+
+   <tr>
+     <td>{{ direction['html_instructions']|safe }}</td>
+     <td>{{ direction['distance']['text'] }}</td>
+     <td>{{ direction['duration']['text'] }}</td>
+   </tr>
+   {% endfor %}
+</table>
+	</body>
+</html>

@@ -20,6 +20,7 @@ class DetailsContainer extends Component {
         this.setState({
             Divpresent: !presentState
         });
+        this.props.changeMapStatus;
         axios.post('https://app.brusqueness80.hasura-app.io/api',{
             "origin": this.state.source,
             "destination": this.state.destination
@@ -80,7 +81,7 @@ class DetailsContainer extends Component {
                     {this.state.directions.map(ele =>{
                         return (
                             <tr>
-                                <td>{ele.html_instructions}</td>
+                                <td dangerouslySetInnerHTML={{__html: ele.html_instructions}}></td>
                                 <td>{ele.distance}</td>
                                 <td>{ele.duration}</td>
                             </tr>
@@ -90,7 +91,10 @@ class DetailsContainer extends Component {
             </div>
         );
         let showInput = (
-            <GetInput sourceValue={this.getsourcevalue} destinationvalue={this.getdestinationvalue} click={this.getDirectionsHandler} />
+            <GetInput 
+                sourceValue={this.getsourcevalue} 
+                destinationvalue={this.getdestinationvalue} 
+                click={this.getDirectionsHandler} />
         );
         if(this.state.Divpresent) {
             showInput = (<DirectionsDiv 
@@ -101,10 +105,15 @@ class DetailsContainer extends Component {
                 directions={direction}
                 click={this.goBackHandler} 
                 status={this.state.status}
-                />);    
+                />
+            );    
         }
         else {
-            showInput = (<GetInput sourceValue={this.getsourcevalue} destinationValue={this.getdestinationvalue} click={this.getDirectionsHandler} />);
+            showInput = (<GetInput 
+                sourceValue={this.getsourcevalue} 
+                destinationValue={this.getdestinationvalue} 
+                click={this.getDirectionsHandler} />
+            );
             
         }
         

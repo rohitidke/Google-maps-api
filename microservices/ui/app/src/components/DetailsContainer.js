@@ -19,7 +19,6 @@ class DetailsContainer extends Component {
         this.setState({
             Divpresent: !presentState
         });
-        this.props.changeMapStatus();
         axios.post('https://app.brusqueness80.hasura-app.io/api',{
             "origin": this.state.source,
             "destination": this.state.destination

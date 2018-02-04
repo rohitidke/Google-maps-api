@@ -52,7 +52,7 @@ const load = {
     display: 'inline',
 }
 const DirectionsDiv = (props) => {
-    if(props.status==500) {
+    if(props.status===500) {
         return(
             <div>
                 <Card style={DetailsDiv}>
@@ -89,7 +89,7 @@ const DirectionsDiv = (props) => {
             <Card style={DetailsDiv}>
                 <CardContent style={{padding: '0px'}}>
                     <h1>loading</h1>
-                    <img src={require('./loading')} height="30px" width="30px" style={load} />
+                    <img src={require('./loading')} alt="loading" height="30px" width="30px" style={load} />
                     <p style={{color:'grey',fontSize:'12px'}}>if it takes to much time you might have entered an invalid address. please hit go back </p>
                     <ButtonElement click={props.click} label="Go back" />
                 </CardContent>

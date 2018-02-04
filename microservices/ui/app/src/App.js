@@ -12,13 +12,15 @@ export default class Mainmap extends Component {
         this.setState({
             mapStatus: !presentState
 		});
-		console.log(this.state.mapStatus);
+		console.log("called");
+		console.log("called");
+		console.log("called");
 	}
 	render () {
 		return (
 			<div>
 				<div className="mainContainer">
-					<MapContainer changeMapStatus={this.state.changeMapStatus}  />	
+					<MapContainer changeMapStatus={this.changeMapStatus}  />	
 					<DetailsContainer mapStatus={this.state.mapStatus} /> 
 				</div>
 			</div>

@@ -34,6 +34,7 @@ export class MapContainer extends Component {
     else if(this.state.mapSelect === true) { 
       map =(
         <iframe
+          title="maps"     
           width="600"
           height="450"
           frameborder="0" style={{border: 0}}

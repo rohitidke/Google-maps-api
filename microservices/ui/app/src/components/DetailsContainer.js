@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Paper from 'material-ui/Paper';
 import GetInput from  './GetInput';
 import DirectionsDiv from './ShowDirection';
 import axios from 'axios';
@@ -20,7 +19,7 @@ class DetailsContainer extends Component {
         this.setState({
             Divpresent: !presentState
         });
-        this.props.changeMapStatus;
+        this.props.changeMapStatus();
         axios.post('https://app.brusqueness80.hasura-app.io/api',{
             "origin": this.state.source,
             "destination": this.state.destination
@@ -113,10 +112,8 @@ class DetailsContainer extends Component {
                 sourceValue={this.getsourcevalue} 
                 destinationValue={this.getdestinationvalue} 
                 click={this.getDirectionsHandler} />
-            );
-            
+            );     
         }
-        
         return (
             <div>
                 {showInput}

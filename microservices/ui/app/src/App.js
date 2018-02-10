@@ -5,23 +5,31 @@ import DetailsContainer from './components/DetailsContainer';
 
 export default class Mainmap extends Component {
 	state = {
-		mapStatus: false,
+		source:'',
+		destination: '',
+		clicked: false,
+		mapReset: false
 	}
-	changeMapStatus = () => {
-		const presentState = this.state.mapStatus;
-        this.setState({
-            mapStatus: !presentState
+	changeClick = (val,src,dest,dir) => {
+		this.setState({
+			source: src,
+			destination: dest,
+			direct: dir,
+			clicked: val
 		});
-		console.log("called");
-		console.log("called");
-		console.log("called");
 	}
-	render () {
+	changeMapBack = () => {
+		const val = this.state.clicked;
+		this.setState({
+			clicked: !val
+		});
+	}
+	render () {	
 		return (
 			<div>
 				<div className="mainContainer">
-					<MapContainer changeMapStatus={this.changeMapStatus}  />	
-					<DetailsContainer mapStatus={this.state.mapStatus} /> 
+					<MapContainer src={this.state.source} mapReset={this.state.mapReset} dest={this.state.destination} dir={this.state.direct} click={this.state.clicked} />	
+					<DetailsContainer changeMapBack={this.changeMapBack} clicked={this.changeClick}  /> 
 				</div>
 			</div>
 		);

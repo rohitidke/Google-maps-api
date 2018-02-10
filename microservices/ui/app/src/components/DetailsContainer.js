@@ -10,12 +10,11 @@ class DetailsContainer extends Component {
         Divpresent: false,
         distance: null,
         duration: null,
-        directions: [],
+        direction: [],
         status: null
-    }
+    } 
     getDirectionsHandler = () => {
         const presentState = this.state.Divpresent;
-        let stat =0;
         this.setState({
             Divpresent: !presentState
         });
@@ -23,22 +22,21 @@ class DetailsContainer extends Component {
             "origin": this.state.source,
             "destination": this.state.destination
         })
-        .then(response  =>  {
+        .then(response  =>  {   
             this.setState({
                 distance: response.data.distance,
-                duration: response.data.duration, 
-                directions: response.data.directions,
+                duration: response.data.duration,
+                direction: response.data.directions,
+                dirstring: response.data.directionString,
                 status: 500
-            });
-            console.log(response);            
+            });  
+            this.props.clicked(this.state.Divpresent,this.state.source,this.state.destination,this.state.dirstring);
+            console.log(response.data)
         })
         .catch(function (error) {
             console.log('error');
-            stat= 404;
-        });
-        this.setState({
-            status: stat
-        });   
+            let stat=404;
+        })
     }
     goBackHandler = () => {
         const presentState = this.state.Divpresent;
@@ -51,9 +49,11 @@ class DetailsContainer extends Component {
             Divpresent: false,
             distance: null,
             duration: null,
-            directions: [],
+            route: null,
             status: null
         });
+        const val = true;
+        this.props.changeMapBack();
     }
     getsourcevalue = () => {
         var sourceval = document.querySelector("#source").value;
@@ -68,7 +68,7 @@ class DetailsContainer extends Component {
         });
     }
     render() {  
-        const direction= (
+        const direction = (
             <div>
                 <table>
                     <tr>
@@ -76,7 +76,7 @@ class DetailsContainer extends Component {
                         <th> Distance </th>
                         <th> Duration </th>
                     </tr>
-                    {this.state.directions.map(ele =>{
+                    {this.state.direction.map(ele =>{
                         return (
                             <tr>
                                 <td dangerouslySetInnerHTML={{__html: ele.html_instructions}}></td>
@@ -85,15 +85,18 @@ class DetailsContainer extends Component {
                             </tr>
                         ); 
                     })}
+                    <tr>
+                        <td style={{color:'#F1F1F1'}}>_ </td>
+                        <td style={{color:'#F1F1F1'}}>_ </td>
+                        <td style={{color:'#F1F1F1'}}>_</td>
+                    </tr>
                  </table> 
             </div>
         );
         let showInput = (
-            <GetInput 
-                sourceValue={this.getsourcevalue} 
-                destinationvalue={this.getdestinationvalue} 
-                click={this.getDirectionsHandler} />
+            <GetInput sourceValue={this.getsourcevalue} destinationvalue={this.getdestinationvalue} click={this.getDirectionsHandler} />
         );
+        console.log(this.state.status);
         if(this.state.Divpresent) {
             showInput = (<DirectionsDiv 
                 source={this.state.source} 
@@ -103,16 +106,13 @@ class DetailsContainer extends Component {
                 directions={direction}
                 click={this.goBackHandler} 
                 status={this.state.status}
-                />
-            );    
+            />);    
         }
         else {
-            showInput = (<GetInput 
-                sourceValue={this.getsourcevalue} 
-                destinationValue={this.getdestinationvalue} 
-                click={this.getDirectionsHandler} />
-            );     
+            showInput = (<GetInput sourceValue={this.getsourcevalue} destinationValue={this.getdestinationvalue} click={this.getDirectionsHandler} />);
+            
         }
+        
         return (
             <div>
                 {showInput}

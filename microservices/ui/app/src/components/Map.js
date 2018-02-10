@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Map, GoogleApiWrapper} from 'google-maps-react';
+import { colors } from 'material-ui';
 
 const MapStyle ={
     width: '100%',
@@ -8,43 +9,38 @@ const MapStyle ={
 }
 export class MapContainer extends Component {
   state = {
-        mapSelect:  this.props.mapStatus,
+    source: this.props.src,
+    destination: this.props.dest,
+    clicked: this.props.click
   }
-  //<Map google={this.props.google} zoom={12} style ={MapStyle}  initialCenter={{lat: 13.027271,lng: 80.271369}}>
- // </Map>
   render() {
-    console.log(this.state.mapSelect);
-    let map = (
-      <Map 
+    let map = (<Map 
+      google={this.props.google} 
+      zoom={12} 
+      style ={MapStyle}  
+      initialCenter={{lat: 13.027271,lng: 80.271369}}>
+    </Map>)
+    if(this.props.click) {
+      map=(<iframe
+        title="maps"     
+        width="60%"
+        height="680px"
+        zoom="11"
+        style={{border: 0,marginLeft:'40%'}}
+        src={this.props.dir} >
+      </iframe>)
+    }
+    else if(this.props.click === false) {
+      map = (<Map 
         google={this.props.google} 
         zoom={12} 
         style ={MapStyle}  
         initialCenter={{lat: 13.027271,lng: 80.271369}}>
-      </Map>
-    );
-    if(this.state.mapSelect === false) {
-      map =(
-      <Map 
-        google={this.props.google} 
-        zoom={12} 
-        style ={MapStyle}  
-        initialCenter={{lat: 13.027271,lng: 80.271369}}>
-      </Map>);
+      </Map>)
     }
-    else if(this.state.mapSelect === true) { 
-      map =(
-        <iframe
-          title="maps"     
-          width="600"
-          height="450"
-          frameborder="0" style={{border: 0}}
-          src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBaeKOjXEG3Cce-YRsqxieRZ5HRy2MVTh0&origin=chennai&destination=mumbai" >
-        </iframe>
-      );
-    }
-    return(
+    return (
       <div>
-        {map}
+         {map}  
       </div>
     );
   }

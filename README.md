@@ -1,13 +1,13 @@
-﻿#Google Maps Geocoding API
+﻿# Google Maps Geocoding API
 Submission 1 of Team T2PF1
 
-##Backend
+## Backend
 Used Google Maps API to create custom API using Python-Flask
 
-##Frontend
+## Frontend
 Used `ReactJs` and `React-native` for web application and mobile application respectively.
 
-##Features
+## Features
 - User inputs source and destination. 
 - It will render map showing routes.
 - It will show distance between source and destination.

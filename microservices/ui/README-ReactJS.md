@@ -6,5 +6,5 @@
   
 ## API used 
   A custom API on top of google's geocoding API was developed using python-flask framework to 
-  handle the requests.(https://app.brusqueness80.hasura-app.io/)
+  handle the requests.(https://app.brusqueness80.hasura-app.io/api)
   

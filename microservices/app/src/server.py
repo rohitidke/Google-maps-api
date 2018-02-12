@@ -6,7 +6,7 @@ app= Flask(__name__)
 
 
 
-@app.route('/', methods = ['POST'])
+@app.route('/api', methods = ['POST'])
 def postJsonHandler():
     content = request.get_json()
     origin=content['origin']
